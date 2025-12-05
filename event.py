@@ -8,6 +8,7 @@ class EventType(StrEnum):
 
 @dataclass(frozen=True)
 class Event[T = str]:
+    """Represents an event in the event store."""
     event_type: EventType
     data: T
     timestamp: datetime = field(default_factory=datetime.now)

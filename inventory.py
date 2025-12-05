@@ -18,6 +18,7 @@ class Inventory:
 
     @cache
     def get_items(self) -> list[tuple[str, int]]:
+        """ Returns a list of items and their counts. """
         counts = Counter[str]()
         for event in self._event_store.get_events():
             item_name = event.data.name
@@ -30,15 +31,7 @@ class Inventory:
         ]
 
     def get_count(self, item: Item) -> int:
-        # counts = 0
-        # for event in self._event_store.get_events():
-        #     if event.event_type == EventType.ITEM_ADDED:
-        #         if event.data["item_id"] == item_id:
-        #             counts += event.data["quantity"]
-        #     elif event.event_type == EventType.ITEM_REMOVED:
-        #         if event.data["item_id"] == item_id:
-        #             counts -= event.data["quantity"]
-        # return counts
+        """ Returns the count of an item in the inventory. """
         return dict(self.get_items()).get(item.name, 0)
 
     def remove_item(self, item:Item) -> None:
